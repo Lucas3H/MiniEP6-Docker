@@ -1,0 +1,10 @@
+systemctl start docker
+docker pull caddy
+docker container run -p 80:80 --name my-caddy -d caddy
+docker container stop my-caddy
+docker container rm my-caddy
+docker container run -p 80:80 \
+	--name my-caddy \
+	-v ${PWD}/Caddyfile:/etc/caddy/Caddyfile \
+	-v ${PWD}/my-website:/usr/src/pages/ \
+	-d caddy
